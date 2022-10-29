@@ -82,10 +82,18 @@ CRIPSY_TEMPLATE_PACK = 'bootstrap5'
 
 WSGI_APPLICATION = 'writeit.wsgi.application'
 
+AUTH_USER_MODEL = 'accounts.account'
+
+AUTHENTICATION_BACKENDS = (
+    ('django.contrib.auth.backends.AllowAllUsersModelBackend'),
+)
+
 SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+CSRF_TRUSTED_ORIGINS = ['https://8000-sjecollins-writeit-tati0vt5z41.ws-eu73.gitpod.io']
 
 
 # Database

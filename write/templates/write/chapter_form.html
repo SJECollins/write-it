@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+Chapter Form
+{% endblock %}
+
+{% block content %}
+
+<section class="container-fluid">
+    <div class="col-12">
+        <h1>Chapter Form</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <div>
+        <a href="{% url 'home' %}">Go Home</a>
+    </div>
+</section>
+
+{% endblock %}

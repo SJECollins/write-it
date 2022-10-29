@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+<section class="container-fluid">
+    <div class="col-12">
+        <h1>The why:</h1>
+        <p>
+            Years ago, when I had no responsibilities and plenty of time, I did NaNoWriMo and somehow manage to finish it, but
+            I wouldn't say the end product was much of anything. The fun part was setting a goal that was very difficult with for 
+            no other reason that to see if I could do it.
+            <br>
+            A million years passed, and I have plenty of responsibilities but a little time and remembered that NaNoWriMo existed 
+            just in time to take part this years. SO, while I'm out of practice and have no real idea what I'm going to do, I decided 
+            to embrace the fun of setting seemingly pointless goals and have given myself the weekend before NaNoWriMo to trying to
+            built this little django app to write the book on. Because while I'm not very good at writing, I'm also not very good at 
+            webdev either so why not combine the two and make my life more difficult.
+        </p>
+    </div>
+</section>
+<section class="container-fluid">
+    <div class="col-12">
+        <h1>The what:</h1>
+        {% for book in book_list %}
+            {% if book.status == 1 %}
+                <div>
+                    <h2>{{ book.title }}</h2>
+                    {% if book.subtitle %}
+                    <h3>{{ book.subtitle }}</h3>
+                    {% endif %}
+                    <span>
+                        {{ book.genre }}
+                    </span>
+                </div>
+                <div>
+                    <h3>Synopsis:</h3>
+                    <p>
+                        {{ book.synopsis}}
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        Started: {{ book.created_on }}
+                    </p>
+                    <p>
+                        Last updated: {{ book.chapter.created_on }}
+                    </p>
+                </div>
+                <div>
+                    <a href="{% url 'book' slug=book.slug %}">Read It</a>
+                </div>
+                <hr>
+            {% elif book.status == 0 %}
+            <div>
+                <h2>{{ book.title }}</h2>
+                <p>It's on the way.</p>
+                {% if user.is_authenticated %}
+                <a href="{% url 'edit_book' slug=book.slug %}">Edit Book</a>
+                {% endif %}
+            </div>
+            {% endif %}
+        {% empty %}
+        <p>No books yet!</p>
+        {% endfor %}
+    </div>
+    <div>
+        {% if user.is_authenticated %}
+        <a href="{% url 'add_book' %}">New Book</a>
+        {% endif %}
+    </div>
+</section>
+
+
+{% endblock %}

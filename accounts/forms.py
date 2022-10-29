@@ -56,12 +56,3 @@ class AccountUpdateForm(forms.ModelForm):
             raise forms.ValidationError(
                 'Email "%s" is already in use.' %
                 account.email)
-
-
-class ContactForm(forms.Form):
-    """
-    Simple contact form for visitors to send message to site's email account.
-    """
-    contact_name = forms.CharField(max_length=200)
-    contact_email = forms.EmailField()
-    contact_message = forms.CharField(widget=forms.Textarea)

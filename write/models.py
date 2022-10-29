@@ -1,5 +1,6 @@
 from django.db import models
 from accounts.models import Account
+from django.utils.text import slugify
 
 STATUS = ((0, 'Draft'), (1, 'Published'))
 
@@ -23,7 +24,7 @@ class Book(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
-        super(Post, self).save(*args, **kwargs)
+        super(Book, self).save(*args, **kwargs)
 
 
 class Chapter(models.Model):
@@ -43,8 +44,8 @@ class Chapter(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
-        super(Post, self).save(*args, **kwargs)
+        self.slug = '-'.join((slugify(self.book.slug), slugify(self.title)))
+        super(Chapter, self).save(*args, **kwargs)
 
 
 class Notes(models.Model):

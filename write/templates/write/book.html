@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+{{ book.title }}
+{% endblock %}
+
+{% block content %}
+
+<section class="container-fluid">
+    <div class="col-12">
+        <h1>{{ book.title }}</h1>
+        {% if book.subtitle %}
+        <h2>{{ book.subtitle }}</h2>
+        {% endif %}
+        <div>
+            <p>
+                {{ book.genre }}
+            </p>
+            <p>
+                {{ book.synopsis|linebreaks }}
+            </p>
+        </div>
+        <div class="row">
+            <span>Started on: {{ book.created_on }}</span>
+            {% if book.chapter %}
+            <span>Last updated: {{ book.chapter.created_on }}</span>
+            {% endif %}
+        </div>
+    </div>
+</section>
+<section class="container-fluid">
+    <div class="col-12">
+        <h1>ToC:</h1>
+        <ol>
+            {% for chapter in chapters %}
+            <li>
+                {% if chapter.status == 1 %}
+                <a href="{% url 'chapter' slug=chapter.slug %}">{{ chapter.title }}</a>
+                <ul>{% if book.subtitle %}
+                    <li>
+                        {{ chapter.subtitle }}
+                    </li>
+                    {% endif %}
+                    <li>
+                        Started: {{ book.created_on }}
+                    </li>
+                    <li>
+                        Last updated: {{ book.chapter.created_on }}
+                    </li>
+                </ul>
+                {% elif chapter.status == 0 %}
+                {{ chapter.title }}
+                <ul>
+                    <li>
+                        It's almost ready.
+                    </li>
+                    <li>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'edit_chapter' slug=chapter.slug %}">Edit Chapter</a>
+                        {% endif %}
+                    </li>
+                </ul>
+                {% endif %}
+            </li>
+            {% empty %}
+            <p>No chapters yet!</p>
+            {% endfor %}  
+        </ol>
+      
+    </div>
+    <div>
+        {% if user.is_authenticated %}
+        <a href="{% url 'add_chapter' slug=book.slug %}">New Chapter</a>
+        <a href="{% url 'edit_book' slug=book.slug %}">Edit Book</a>
+        {% endif %}
+    </div>
+</section>
+
+
+{% endblock %}

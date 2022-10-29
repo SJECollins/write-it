@@ -1,5 +1,5 @@
 from django import forms
-from django_summernote.fields import SummernoteTextField()
+from django_summernote.fields import SummernoteTextField
 from .models import Book, Chapter, Notes
 
 

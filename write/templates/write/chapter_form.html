@@ -13,7 +13,10 @@ Chapter Form
         <h1>Chapter Form</h1>
         <form method="POST">
             {% csrf_token %}
-            {{ form|crispy }}
+            {{ form.title|as_crispy_field }}
+            {{ form.subtitle|as_crispy_field }}
+            {{ form.content }}
+            {{ form.status|as_crispy_field }}
             <button type="submit">Submit</button>
         </form>
     </div>

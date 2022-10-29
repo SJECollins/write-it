@@ -13,7 +13,11 @@ Book Form
         <h1>Book Form</h1>
         <form method="POST">
             {% csrf_token %}
-            {{ form|crispy }}
+            {{ form.title|as_crispy_field }}
+            {{ form.subtitle|as_crispy_field }}
+            {{ form.genre|as_crispy_field }}
+            {{ form.synopsis }}
+            {{ form.status|as_crispy_field }}
             <button type="submit">Submit</button>
         </form>
     </div>

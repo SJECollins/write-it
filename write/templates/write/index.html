@@ -12,67 +12,75 @@ Home
     <div class="col-12">
         <h1 class="headings">The why:</h1>
         <p>
-            Years ago, when I had no responsibilities and plenty of time, I did NaNoWriMo and somehow manage to finish it, but
-            I wouldn't say the end product was much of anything. The fun part was setting a goal that was very difficult with for 
+            Years ago, when I had no responsibilities and plenty of time, I did NaNoWriMo and somehow managed to finish
+            it, but
+            I wouldn't say the end product was much of anything. The fun part was setting a goal that was very difficult
+            with for
             no other reason that to see if I could do it.
         </p>
         <p>
-            A million years passed, and I have plenty of responsibilities but a little time and remembered that NaNoWriMo existed 
-            just in time to take part this years. SO, while I'm out of practice and have no real idea what I'm going to do, I decided 
-            to embrace the fun of setting seemingly pointless goals and have given myself the weekend before NaNoWriMo to trying to
-            built this little django app to write the book on. Because while I'm not very good at writing, I'm also not very good at 
+            A million years passed, and now I have plenty of responsibilities, but lately found a little time and
+            remembered that NaNoWriMo existed
+            just in time to take part this year. <em>SO</em>, while I'm out of practice and have no real idea what I'm
+            going to do, I decided
+            to embrace the fun of setting seemingly arbitrary goals and have given myself the weekend before NaNoWriMo
+            to try to
+            built this little django app to write the book on. Because while I'm not very good at writing, I'm also not
+            very good at
             webdev either so why not combine the two and make my life more difficult.
         </p>
+        <hr>
+        <hr>
     </div>
 </section>
 <section class="container-fluid">
     <div class="col-12">
         <h1 class="headings">The what:</h1>
         {% for book in book_list %}
-            {% if book.status == 1 %}
-                <div>
-                    <h2 class="headings subheadings">{{ book.title }}</h2>
-                    {% if book.subtitle %}
-                    <h3 class="subtitle">{{ book.subtitle }}</h3>
-                    {% endif %}
-                    <span>
-                        {{ book.genre }}
-                    </span>
-                </div>
+        {% if book.status == 1 %}
+        <div class="row my-3 book-card">
+            <div class="col-md-8">
+                <h2 class="headings subheadings">{{ book.title }}</h2>
+                {% if book.subtitle %}
+                <h3 class="subtitle">{{ book.subtitle }}</h3>
+                {% endif %}
+                <hr>
                 <div>
                     <h3 class="subtitle">Synopsis:</h3>
                     <p>
-                        {{ book.synopsis}}
+                        {{ book.synopsis|safe }}
                     </p>
                 </div>
-                <div>
-                    <p>
-                        Started: {{ book.created_on }}
-                    </p>
-                    <p>
-                        Last updated: {{ book.chapter.created_on }}
-                    </p>
-                </div>
-                <div>
-                    <a href="{% url 'book' slug=book.slug %}">Read It</a>
-                </div>
-                <hr>
-            {% elif book.status == 0 %}
-            <div>
-                <h2>{{ book.title }}</h2>
-                <p>It's on the way.</p>
-                {% if user.is_authenticated %}
-                <a href="{% url 'edit_book' slug=book.slug %}">Edit Book</a>
-                {% endif %}
             </div>
+            <div class="col-md-4">
+                <ul>
+                    <li>Genre: {{ book.genre }}</li>
+                    <li>Started: {{ book.created_on|date:"d M y" }}</li>
+                    <li>Updated: {{ book.chapter.latest.created_on|date:"d M y" }}</li>
+                    <li>Latest chapter: <a class="wrt-link" href="{% url 'chapter' slug=book.chapter.latest.id %}">{{ book.chapter.latest}}</a></li>
+                </ul>
+            </div>
+            <div>
+                <a class="wrt-link float-end" href="{% url 'book' slug=book.slug %}">Read It</a>
+            </div>
+        </div>
+        <hr>
+        {% elif book.status == 0 %}
+        <div>
+            <h2>{{ book.title }}</h2>
+            <p>It's on the way.</p>
+            {% if user.is_authenticated %}
+            <a href="{% url 'edit_book' slug=book.slug %}">Edit Book</a>
             {% endif %}
+        </div>
+        {% endif %}
         {% empty %}
         <p>No books yet!</p>
         {% endfor %}
     </div>
     <div>
         {% if user.is_authenticated %}
-        <a href="{% url 'add_book' %}">New Book</a>
+        <a class="nav-links dark-text" href="{% url 'add_book' %}">New Book</a>
         {% endif %}
     </div>
 </section>

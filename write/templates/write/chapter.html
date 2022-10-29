@@ -27,7 +27,7 @@
         {% if notes %}
         <div class="col-md-9">
             <p>
-                {{ chapter.content|linebreaks }}
+                {{ chapter.content|safe }}
             </p>
         </div>
         <div class="col-md-3">

@@ -21,6 +21,10 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Post, self).save(*args, **kwargs)
+
 
 class Chapter(models.Model):
     book = models.ForeignKey(Book, on_delete=models.SET_NULL, null=True, related_name='chapter')
@@ -37,6 +41,10 @@ class Chapter(models.Model):
     
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Post, self).save(*args, **kwargs)
 
 
 class Notes(models.Model):

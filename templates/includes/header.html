@@ -1,13 +1,15 @@
 <header>
-    <nav>
-        <div>
-            <h1>Write It</h1>
-        </div>
-        <div>
-            <a href="{% url 'accounts:login' %}">Login</a>
-            {% if user.is_authenticated %}
-            <a href="{% url 'accounts:logout' %}">logout</a>
-            {% endif %}
-        </div>
+    <nav class="nav-style container-fluid">
+            <div class="col-12 d-flex justify-content-between">
+                <div class="col headings">
+                    <h1>Write It</h1>
+                </div>
+                <div>
+                    <a class="nav-links" href="{% url 'accounts:login' %}">Login</a>
+                    {% if user.is_authenticated %}
+                    <a class="nav-links" href="{% url 'accounts:logout' %}">Logout</a>
+                    {% endif %}
+                </div>
+            </div>
     </nav>
 </header>

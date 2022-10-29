@@ -10,12 +10,13 @@ Home
 
 <section class="container-fluid">
     <div class="col-12">
-        <h1>The why:</h1>
+        <h1 class="headings">The why:</h1>
         <p>
             Years ago, when I had no responsibilities and plenty of time, I did NaNoWriMo and somehow manage to finish it, but
             I wouldn't say the end product was much of anything. The fun part was setting a goal that was very difficult with for 
             no other reason that to see if I could do it.
-            <br>
+        </p>
+        <p>
             A million years passed, and I have plenty of responsibilities but a little time and remembered that NaNoWriMo existed 
             just in time to take part this years. SO, while I'm out of practice and have no real idea what I'm going to do, I decided 
             to embrace the fun of setting seemingly pointless goals and have given myself the weekend before NaNoWriMo to trying to
@@ -26,20 +27,20 @@ Home
 </section>
 <section class="container-fluid">
     <div class="col-12">
-        <h1>The what:</h1>
+        <h1 class="headings">The what:</h1>
         {% for book in book_list %}
             {% if book.status == 1 %}
                 <div>
-                    <h2>{{ book.title }}</h2>
+                    <h2 class="headings subheadings">{{ book.title }}</h2>
                     {% if book.subtitle %}
-                    <h3>{{ book.subtitle }}</h3>
+                    <h3 class="subtitle">{{ book.subtitle }}</h3>
                     {% endif %}
                     <span>
                         {{ book.genre }}
                     </span>
                 </div>
                 <div>
-                    <h3>Synopsis:</h3>
+                    <h3 class="subtitle">Synopsis:</h3>
                     <p>
                         {{ book.synopsis}}
                     </p>

@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Electrolize&family=Merriweather&family=Rubik&display=swap");
+
+:root {
+    --site-black: #282828;
+    --site-dark-grey: #424242;
+    --site-light-grey: #d9d9e0fb;
+    --site-white: #e9e8ea;
+    --site-dark-blue: #0077cc;
+    --site-light-blue: #0095ff;
+    --site-dark-orange: #cc5500;
+    --site-light-orange: #ff6400;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Rubik', sans-serif;
+    font-size: 1rem;
+    color: var(--site-black);
+    letter-spacing: 2px;
+    background-color: var(--site-light-grey);
+}
+
+/* Font Styling */
+
+.headings {
+    font-family: 'Merriweather', serif;
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.subheadings {
+    font-size: 1.5rem;
+}
+
+.subtitle {
+    font-family: 'Merriweather', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.little {
+    font-family: 'Electrolize', sans-serif;
+    font-size: 0.75em;
+}
+
+/* Links & Buttons */
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.nav-links {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    margin: 1rem;
+    color: var(--site-light-grey);
+    font-weight: 600;
+    border-radius: 4px;
+    transition: all 0.8s linear;
+}
+
+.nav-links:hover {
+    color: var(--site-white);
+    font-weight: 900;
+    box-shadow: inset 0 -60px 50px 0 var(--site-dark-orange), 0 2px 4px 0 var(--site-dark-grey);
+}
+
+
+
+/* Nav Styling */
+
+.nav-style {
+    background-color: var(--site-black);
+    color: var(--site-light-grey);
+    padding: 1em 2em;
+    box-shadow: 0 2px 4px 0 var(--site-dark-grey);
+}
+
+/* Footer Styling */
+
+footer {
+    background-color: var(--site-black);
+    color: var(--site-light-grey);
+}

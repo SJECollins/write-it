@@ -41,8 +41,20 @@ body {
     font-weight: 600;
 }
 
+.title-draft {
+    color: var(--site-dark-grey);
+    font-family: 'Electrolize', sans-serif;
+    font-size: 1.25em;
+    font-weight: 800;
+}
+
 .little {
     font-family: 'Electrolize', sans-serif;
+    font-size: 0.75em;
+}
+
+.note-txt {
+    font-family: 'Merriweather', serif;
     font-size: 0.75em;
 }
 
@@ -54,6 +66,11 @@ li {
 
 a {
     text-decoration: none;
+}
+
+button {
+    border: none;
+    background-color: transparent;
 }
 
 .nav-links {
@@ -87,9 +104,34 @@ a {
 .wrt-link:hover {
     color: var(--site-dark-orange);
     font-style: italic;
-    text-shadow: 2px 2px var(--site-light-grey);
+    text-shadow: 4px 2px var(--site-white);
 }
 
+.title-link {
+    color: var(--site-dark-grey);
+    font-family: 'Electrolize', sans-serif;
+    font-size: 1.25em;
+    font-weight: 800;
+    transition: all .3s linear;
+}
+
+.title-link:hover {
+    color: var(--site-dark-orange);
+    text-shadow: 2px 2px var(--site-light-grey);
+    font-style: oblique;
+    transition: all .2s ease-in;
+}
+
+.edit-note {
+    color: var(--site-dark-orange);
+    font-weight: 600;
+    transition: all .2s ease-in;
+}
+
+.edit-note:hover {
+    color: var(--site-dark-blue);
+    font-style: oblique;
+}
 
 /* Nav Styling */
 
@@ -105,6 +147,21 @@ a {
 .book-card {
     padding: 1em;
     background-image: linear-gradient(225deg, var(--site-light-grey) 10%, var(--site-white));
+}
+
+.content-card {
+    border: 8px groove var(--site-dark-grey);
+    background-color: var(--site-white);
+    padding: 1em;
+    margin: 1em;
+}
+
+.upcoming {
+    background-image: linear-gradient(45deg, var(--site-white) 10%, var(--site-light-orange));
+}
+
+hr {
+    border-top: 4px ridge var(--site-dark-grey);
 }
 
 /* Footer Styling */

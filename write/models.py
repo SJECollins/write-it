@@ -17,7 +17,7 @@ class Book(models.Model):
     status = models.IntegerField(choices=STATUS, default=0)
 
     class Meta:
-        ordering = ['-created_on']
+        ordering = ['-status', '-created_on']
 
     def __str__(self):
         return self.title

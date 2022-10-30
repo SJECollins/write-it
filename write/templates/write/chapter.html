@@ -10,57 +10,74 @@
 
 {% block content %}
 
-<section class="container-fluid">
-    <div class="col-12">
-        <h1>{{ chapter.title }}</h1>
+<div>
+    <a class="wrt-link" href="{% url 'book' slug=chapter.book.slug %}">Back to {{ chapter.book.title}} >></a>
+</div>
+
+<section class="container-fluid book-card">
+    <div class="row">
+        <div class="col-sm-8">
+        <h1 class="headings">{{ chapter.title }}</h1>
         {% if chapter.subtitle %}
-        <h2>{{ chapter.subtitle }}</h2>
+        <h2 class="subtitle">{{ chapter.subtitle }}</h2>
         {% endif %}
-        <div class="row">
-            <span>Started on: {{ chapter.created_on }}</span>
-            <span>Last updated: {{ chapter.edited_on }}</span>
+    </div>
+        <div class="col-sm-4 d-flex justify-content-sm-end">
+            <ul>
+            <li>Started on:</li>
+            <li>{{ chapter.created_on|date:'d M y' }}</li>
+            <li>Last updated:</li>
+            <li>{{ chapter.edited_on|date:'d M y' }}</li>
+            </ul>
         </div>
     </div>
-</section>
-<section class="container-fluid">
     <div class="row">
         {% if notes %}
         <div class="col-md-9">
+            <div class="content-card">
             <p>
                 {{ chapter.content|safe }}
             </p>
+            </div>
         </div>
         <div class="col-md-3">
             {% for note in notes %}
-            <div>
+            <div class="note-txt">
                 <p>
                     {{ note.content|linebreaks }}
                 </p>
-                <span>{{ note.created_on }}</span>
-                <a href="{% url 'edit_note' note_id=note.id %}">Edit Note</a>
+                <span class="little">{{ note.created_on }}</span>
+                {% if user.is_authenticated %}
+                <a class="edit-note float-end" href="{% url 'edit_note' note_id=note.id %}">Edit Note</a>
+                {% endif %}
             </div>
             {% endfor %}
         </div>
         {% else %}
-        <div class="col-md-9">
+        <div class="col-md-10 content-card">
             <p>
-                {{ chapter.content|linebreaks }}
+                {{ chapter.content|safe }}
             </p>
         </div>
         {% endif %}
     </div>
 </section>
 <section class="row">
-    <div class="col-6">
+    <div class="col-6 mx-auto">
         {% if user.is_authenticated %}
-        <a href="{% url 'add_chapter' slug=chapter.book.slug %}">New Chapter</a>
-        <a href="{% url 'edit_chapter' slug=chapter.slug %}">Edit Chapter</a>
-        <a href="{% url 'add_note' slug=chapter.slug %}">Add Note</a>
+        <a class="nav-links dark-text" href="{% url 'add_chapter' slug=chapter.book.slug %}">New Chapter</a>
+        <a class="nav-links dark-text" href="{% url 'edit_chapter' slug=chapter.slug %}">Edit Chapter</a>
+        <a class="nav-links dark-text" href="{% url 'add_note' slug=chapter.slug %}">Add Note</a>
         {% endif %}
     </div>
-    <div class="col-4">
-        <p>Wordcount: {{ chapter.content|wordcount }}</p>
+    <div class="col-4 little">
+        <p class="float-end">Wordcount: {{ chapter.content|wordcount }}</p>
     </div>
+</section>
+<section class="col-12 d-flex justify-content-between">
+    <a class="wrt-link" href="{% url 'home' %}">Go Home >></a>
+    <a class="wrt-link" href="#top">Back to Top</a>
+    <a class="wrt-link" href="{% url 'book' slug=chapter.book.slug %}">Back to {{ chapter.book.title}} >></a>
 </section>
 
 

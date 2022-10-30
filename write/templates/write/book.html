@@ -8,72 +8,80 @@
 
 {% block content %}
 
-<section class="container-fluid">
-    <div class="col-12">
-        <h1>{{ book.title }}</h1>
+<div>
+    <a class="wrt-link" href="{% url 'home' %}">Go Home >></a>
+</div>
+
+<section class="container-fluid book-card">
+    <div class="row">
+        <div class="col-sm-8">
+        <h1 class="headings" >{{ book.title }}</h1>
         {% if book.subtitle %}
-        <h2>{{ book.subtitle }}</h2>
+        <h2 class="subtitle">{{ book.subtitle }}</h2>
         {% endif %}
-        <div>
-            <p>
-                {{ book.genre }}
-            </p>
+        </div>
+        <div class="col-sm-4">
+            <ul>
+                <li>Genre: {{ book.genre }}</li>
+                <li>Started: {{ book.created_on|date:"d M y" }}</li>
+                <li>Updated: {{ book.chapter.latest.created_on|date:"d M y" }}</li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="content-card">
             <p>
                 {{ book.synopsis|safe }}
             </p>
-        </div>
-        <div class="row">
-            <span>Started on: {{ book.created_on }}</span>
-            {% if book.chapter %}
-            <span>Last updated: {{ book.chapter.created_on }}</span>
-            {% endif %}
+            </div>
         </div>
     </div>
-</section>
-<section class="container-fluid">
     <div class="col-12">
-        <h1>ToC:</h1>
+        <h1 class="headings subheadings">Table of Contents:</h1>
         <ol>
             {% for chapter in chapters %}
             <li>
                 {% if chapter.status == 1 %}
-                <a href="{% url 'chapter' slug=chapter.slug %}">{{ chapter.title }}</a>
-                <ul>{% if book.subtitle %}
+                <a class="title-link" href="{% url 'chapter' slug=chapter.slug %}">{{ chapter.title }} >></a>
+                <ul>{% if chapter.subtitle %}
                     <li>
                         {{ chapter.subtitle }}
                     </li>
                     {% endif %}
-                    <li>
-                        Started: {{ book.created_on }}
+                    <li class="little">
+                        Added: {{ chapter.created_on|date:'d M y' }}
                     </li>
-                    <li>
-                        Last updated: {{ book.chapter.created_on }}
+                    <li class="little">
+                        Last updated: {{ chapter.edited_on|date:'d M y' }}
                     </li>
                 </ul>
                 {% elif chapter.status == 0 %}
-                {{ chapter.title }}
+                <div class="book-card upcoming p-0">
+                <span class="title-draft">{{ chapter.title }}</span>
                 <ul>
                     <li>
                         It's almost ready.
                     </li>
+                    {% if user.is_authenticated %}
                     <li>
-                        {% if user.is_authenticated %}
-                        <a href="{% url 'edit_chapter' slug=chapter.slug %}">Edit Chapter</a>
-                        {% endif %}
+                        <a class="wrt-link" href="{% url 'edit_chapter' slug=chapter.slug %}">Edit Chapter >></a>    
                     </li>
+                    {% endif %}
                 </ul>
+                </div>
                 {% endif %}
             </li>
             {% empty %}
             <p>No chapters yet!</p>
             {% endfor %}  
         </ol>
-      
     </div>
+
+</section>
+<section>
     <div>
         {% if user.is_authenticated %}
-        <a href="{% url 'add_chapter' slug=book.slug %}">New Chapter</a>
-        <a href="{% url 'edit_book' slug=book.slug %}">Edit Book</a>
+        <a class="nav-links dark-text" href="{% url 'add_chapter' slug=book.slug %}">New Chapter</a>
+        <a class="nav-links dark-text" href="{% url 'edit_book' slug=book.slug %}">Edit Book</a>
         {% endif %}
     </div>
 </section>

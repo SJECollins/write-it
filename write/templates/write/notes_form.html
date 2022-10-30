@@ -11,14 +11,20 @@ Note Form
 <section class="container-fluid">
     <div class="col-12">
         <h1>Note Form</h1>
-        <form method="POST">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <button type="submit">Submit</button>
-        </form>
+        <div class="d-flex justify-content-center">
+            <form method="POST">
+                {% csrf_token %}
+    
+                <div class="form-group mb-0">
+                {{ form.content|as_crispy_field }}                
+                </div>
+
+                <button class="nav-links dark-text" type="submit">Submit</button>
+            </form>
+        </div>
     </div>
     <div>
-        <a href="{% url 'home' %}">Go Home</a>
+        <a class="wrt-link float-end" href="{% url 'home' %}">Go Home >></a>
     </div>
 </section>
 

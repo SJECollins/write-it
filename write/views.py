@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.db.models import Sum
 
 from .models import Book, Chapter, Notes
 from .forms import BookForm, ChapterForm, NotesForm
@@ -18,10 +19,12 @@ def home(request):
 def book(request, slug):
     book = get_object_or_404(Book, slug=slug)
     chapters = book.chapter.all()
+    words = chapters.aggregate(wordcount_sum=Sum('wordcount'))
     template_name = 'write/book.html'
     context = {
         'book': book,
         'chapters': chapters,
+        'words': words,
     }
     return render(request, template_name, context)
 

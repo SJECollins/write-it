@@ -23,12 +23,13 @@
         <div class="col-sm-4">
             <ul>
                 <li>Genre: {{ book.genre }}</li>
+                <li>Wordcount: {{ words.wordcount_sum }}</li>
                 <li>Started: {{ book.created_on|date:"d M y" }}</li>
                 <li>Updated: {{ book.chapter.latest.created_on|date:"d M y" }}</li>
             </ul>
         </div>
         <div class="row">
-            <div class="content-card">
+            <div class="content-card ltr-space">
             <p>
                 {{ book.synopsis|safe }}
             </p>

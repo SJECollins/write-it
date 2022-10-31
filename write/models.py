@@ -1,3 +1,4 @@
+import re
 from django.db import models
 from accounts.models import Account
 from django.utils.text import slugify
@@ -33,6 +34,7 @@ class Chapter(models.Model):
     subtitle = models.CharField(max_length=80, null=True, blank=True)
     slug = models.SlugField(max_length=40, unique=True)
     content = models.TextField()
+    wordcount = models.IntegerField(default=0)
     created_on = models.DateField(auto_now_add=True)
     edited_on = models.DateField(auto_now=True)
     status = models.IntegerField(choices=STATUS, default=0)
@@ -45,6 +47,8 @@ class Chapter(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
+        text = re.sub(r'<.*?>', ' ', self.content)
+        self.wordcount = len(text.split())
         self.slug = '-'.join((slugify(self.book.slug), slugify(self.title)))
         super(Chapter, self).save(*args, **kwargs)
 

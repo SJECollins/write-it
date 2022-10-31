@@ -58,6 +58,10 @@ body {
     font-size: 0.75em;
 }
 
+.ltr-space {
+    letter-spacing: 0;
+}
+
 /* Links & Buttons */
 
 li {

@@ -54,7 +54,7 @@
             {% endfor %}
         </div>
         {% else %}
-        <div class="col-md-10 content-card">
+        <div class="col-md-10 content-card ltr-space">
             <p>
                 {{ chapter.content|safe }}
             </p>
@@ -71,7 +71,7 @@
         {% endif %}
     </div>
     <div class="col-4 little">
-        <p class="float-end">Wordcount: {{ chapter.content|wordcount }}</p>
+        <p class="float-end">Wordcount: {{ chapter.wordcount }}</p>
     </div>
 </section>
 <section class="col-12 d-flex justify-content-between">

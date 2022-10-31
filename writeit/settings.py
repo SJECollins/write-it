@@ -118,7 +118,7 @@ if development:
 else:
     DATABASES = {
         'default': dj_database_url.config(
-            default='postgres://writeit_user:RcOyswSIbuHOXLC8Z4uWVrlKoRSFK5AO@dpg-cdfr9ola4992md527oj0-a.frankfurt-postgres.render.com/writeit',
+            default=os.environ.get('DATABASE_URL'),
             conn_max_age=600
         )
     }

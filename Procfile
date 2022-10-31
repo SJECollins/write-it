@@ -1,1 +1,1 @@
-we: gunicorn write-it.wsgi
+web: gunicorn write-it.wsgi

@@ -1,1 +1,1 @@
-web: gunicorn write-it.wsgi:application
+web: gunicorn writeit.wsgi:application

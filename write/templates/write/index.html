@@ -59,7 +59,9 @@ Home
                     <li>Genre: {{ book.genre }}</li>
                     <li>Started: {{ book.created_on|date:"d M y" }}</li>
                     <li>Updated: {{ book.chapter.latest.created_on|date:"d M y" }}</li>
+                    {% if book.chapter.latest %}
                     <li>Latest chapter: <a class="wrt-link" href="{% url 'chapter' slug=book.chapter.latest.slug %}">{{ book.chapter.latest}} >></a></li>
+                    {% endif %}
                 </ul>
             </div>
             <div>
